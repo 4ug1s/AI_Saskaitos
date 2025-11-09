@@ -1,0 +1,76 @@
+{
+  "dokumento_tipas": "PVM sąskaita faktūra",
+  "numeris": "MAČ19222",
+  "data": "2025-10-20",
+  "pardavejas": {
+    "pavadinimas": "UAB \"7 karjerai\"",
+    "imones_kodas": "305654042",
+    "pvm_kodas": "LT100013856212",
+    "adresas": "Taikos pr. 4A-59, LT-91229 Klaipėda",
+    "bankas": "Swedbank, AB",
+    "saskaitos_numeris": "LT17 7300 0101 6633 9230"
+  },
+  "gavejas": {
+    "pavadinimas": "Algintra MB",
+    "imones_kodas": "307055970",
+    "pvm_kodas": "LT100017485212",
+    "adresas": "M. Mažvydo g. 3-67, LT-06287 Vilnius"
+  },
+  "prekes": [
+    {
+      "pavadinimas": "Smėlis 0/5",
+      "vezimas": "15201",
+      "kiekis_t": 13.3,
+      "vieneto_kaina_eur": 1.5,
+      "viso_eur": 19.95
+    },
+    {
+      "pavadinimas": "Smėlis 0/5",
+      "vezimas": "15213",
+      "kiekis_t": 13.45,
+      "vieneto_kaina_eur": 1.5,
+      "viso_eur": 20.18
+    },
+    {
+      "pavadinimas": "Žvirgždo skalda 0/45 II",
+      "vezimas": "15277",
+      "kiekis_t": 13.25,
+      "vieneto_kaina_eur": 10.0,
+      "viso_eur": 132.5
+    },
+    {
+      "pavadinimas": "Žvirgždo skalda 0/45 II",
+      "vezimas": "15288",
+      "kiekis_t": 13.1,
+      "vieneto_kaina_eur": 10.0,
+      "viso_eur": 131.0
+    },
+    {
+      "pavadinimas": "Žvirgždo skalda 0/45 II",
+      "vezimas": "15343",
+      "kiekis_t": 12.9,
+      "vieneto_kaina_eur": 10.0,
+      "viso_eur": 129.0
+    },
+    {
+      "pavadinimas": "Žvirgždo skalda 0/45 II",
+      "vezimas": "",
+      "kiekis_t": 6.0,
+      "vieneto_kaina_eur": 10.0,
+      "viso_eur": 60.0
+    },
+    {
+      "pavadinimas": "Smėlis 0/5",
+      "vezimas": "",
+      "kiekis_t": 2.0,
+      "vieneto_kaina_eur": 1.5,
+      "viso_eur": 3.0
+    }
+  ],
+  "sumos": {
+    "viso_be_pvm_eur": 495.63,
+    "pvm_suma_eur": 104.08,
+    "viso_su_pvm_eur": 599.71
+  },
+  "apmoketi_iki": "2025-11-03"
+}

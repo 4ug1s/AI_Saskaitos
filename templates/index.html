@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sąskaitų analizatorius</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            background-color: #fafafa;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+        }
+        .user-message span {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        .ai-message span {
+            display: inline-block;
+            background-color: #e2e2e2;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        .input-group {
+            display: flex;
+        }
+        #query-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        #send-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sąskaitų faktūrų analizatorius</h1>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-group">
+            <input type="text" id="query-input" placeholder="Įveskite savo klausimą...">
+            <button id="send-button">Siųsti</button>
+        </div>
+    </div>
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const queryInput = document.getElementById('query-input');
+        const sendButton = document.getElementById('send-button');
+
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `${sender}-message`);
+            const messageSpan = document.createElement('span');
+            messageSpan.textContent = message;
+            messageDiv.appendChild(messageSpan);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const query = queryInput.value.trim();
+            if (query === "") return;
+
+            addMessage('user', query);
+            queryInput.value = '';
+
+            addMessage('ai', 'Gaunamas atsakymas...');
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+                const data = await response.json();
+
+                // Pakeičiame "Gaunamas atsakymas..." į tikrąjį atsakymą
+                const lastAiMessage = chatBox.querySelector('.ai-message:last-child span');
+                if (data.response) {
+                    lastAiMessage.textContent = data.response;
+                } else {
+                    lastAiMessage.textContent = 'Įvyko klaida gaunant atsakymą.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                const lastAiMessage = chatBox.querySelector('.ai-message:last-child span');
+                lastAiMessage.textContent = 'Įvyko klaida gaunant atsakymą.';
+            }
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        queryInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
